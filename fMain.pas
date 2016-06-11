@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation, Datasnap.DSCommon,
   Data.DB, Data.SqlExpr, DBXJSON, JSON, Data.DBXDataSnap, Data.DBXCommon,
-  IPPeerClient;
+  IPPeerClient, FMX.Edit;
 
 type
   TmemoCallback = class(TDBXCallback)
@@ -16,16 +16,21 @@ type
     function Execute(const Arg: TJSONValue): TJSONValue; override;
   end;
   TForm1 = class(TForm)
-    CornerButton1: TCornerButton;
-    Memo1: TMemo;
-    Memo2: TMemo;
-    Memo3: TMemo;
+    btnStart: TCornerButton;
+    edtConversation: TMemo;
+    edtChatText: TMemo;
+    edtPeople: TMemo;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    SQLCunnection1: TSQLConnection;
+    SQLConnection1: TSQLConnection;
     ChannelManager: TDSClientCallbackChannelManager;
-    procedure CornerButton1Click(Sender: TObject);
+    btnStop: TCornerButton;
+    edtAddress: TEdit;
+    Label4: TLabel;
+    btnSend: TButton;
+    procedure btnStartClick(Sender: TObject);
+    procedure btnStopClick(Sender: TObject);
   private
     CallBackID : String;
   public
@@ -42,16 +47,22 @@ implementation
 {$R *.iPhone55in.fmx IOS}
 {$R *.iPhone4in.fmx IOS}
 {$R *.Windows.fmx MSWINDOWS}
+{$R *.NmXhdpiPh.fmx ANDROID}
+{$R *.LgXhdpiPh.fmx ANDROID}
 
-procedure TForm1.CornerButton1Click(Sender: TObject);
+procedure TForm1.btnStartClick(Sender: TObject);
 begin
-  if not SQLCunnection1.Connected  then
+//бутон start заповаме връзката
+  if not SQLConnection1.Connected  then
     begin
-      SQLCunnection1.Open;
+      ChannelManager.DSHostname := edtAddress.Text;
+      SQLConnection1.Open;
       CallbackID := DateTimeToStr(Now);
     end;
 
-
+  edtAddress.Enabled := False;
+  btnStart.Enabled := False;
+  btnStop.Enabled := True;
   ChannelManager.RegisterCallback(CallBackID, TMemoCallback.Create());
 end;
 
@@ -74,9 +85,22 @@ begin
      TThread.Synchronize(nil,
      procedure
      begin
-     Form1.Memo1.Lines.Text := MessageStr;
+     Form1.edtConversation.Lines.Text := MessageStr;
      end);
    end;
+end;
+
+procedure TForm1.btnStopClick(Sender: TObject);
+begin
+//бутон stop прекъсваме връзката и бутона стоп
+  edtAddress.Enabled := True;
+  btnStart.Enabled := True;
+  btnStop.Enabled := False;
+  ChannelManager.UnregisterCallback(CallBackID);
+
+  if  SQLConnection1.Connected  then
+    SQLConnection1.Close;
+
 end;
 
 end.

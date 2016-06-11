@@ -2,40 +2,55 @@ inherited Form1_iPhone47in: TForm1_iPhone47in
   ClientHeight = 647
   ClientWidth = 375
   DesignerMasterStyle = 3
-  inherited CornerButton1: TCornerButton
-    Position.X = 256.000000000000000000
-    Position.Y = 536.000000000000000000
-    Size.Width = 105.000000000000000000
+  inherited btnStart: TCornerButton
+    Position.X = 168.000000000000000000
   end
-  inherited Memo1: TMemo
+  inherited edtConversation: TMemo
     Size.Width = 241.000000000000000000
-    Size.Height = 481.000000000000000000
+    Size.Height = 409.000000000000000000
     Viewport.Width = 233.000000000000000000
-    Viewport.Height = 473.000000000000000000
+    Viewport.Height = 401.000000000000000000
   end
-  inherited Memo2: TMemo
-    Position.Y = 552.000000000000000000
+  inherited edtChatText: TMemo
+    Position.Y = 520.000000000000000000
     Size.Width = 225.000000000000000000
     Size.Height = 49.000000000000000000
     Viewport.Width = 217.000000000000000000
     Viewport.Height = 41.000000000000000000
   end
-  inherited Memo3: TMemo
+  inherited edtPeople: TMemo
     Position.X = 280.000000000000000000
     Position.Y = 32.000000000000000000
     Size.Width = 81.000000000000000000
-    Size.Height = 473.000000000000000000
+    Size.Height = 449.000000000000000000
     Viewport.Width = 73.000000000000000000
-    Viewport.Height = 465.000000000000000000
+    Viewport.Height = 441.000000000000000000
   end
   inherited Label2: TLabel
-    Position.Y = 520.000000000000000000
+    Position.Y = 488.000000000000000000
   end
   inherited Label3: TLabel
     Position.X = 280.000000000000000000
     Position.Y = 8.000000000000000000
+    Size.Width = 81.000000000000000000
   end
-  inherited SQLCunnection1: TSQLConnection
+  inherited btnStop: TCornerButton
+    Position.X = 216.000000000000000000
+    Size.Width = 49.000000000000000000
+  end
+  inherited edtAddress: TEdit
+    Size.Height = 30.000000000000000000
+  end
+  inherited Label4: TLabel
+    Size.Width = 185.000000000000000000
+    Size.Height = 21.000000000000000000
+    Size.PlatformDefault = False
+  end
+  inherited btnSend: TButton
+    Position.X = 280.000000000000000000
+    Position.Y = 528.000000000000000000
+  end
+  inherited SQLConnection1: TSQLConnection
     Params.Strings = (
       'DriverUnit=Data.DBXDataSnap'
       
@@ -48,6 +63,5 @@ inherited Form1_iPhone47in: TForm1_iPhone47in
       'Filters={}'
       'CommunicationProtocol=tcp/ip'
       'DatasnapContext=datasnap/')
-    Connected = True
   end
 end

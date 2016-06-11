@@ -3,63 +3,63 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 480
-  ClientWidth = 576
+  ClientWidth = 317
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   DesignerMasterStyle = 3
-  object CornerButton1: TCornerButton
-    Position.X = 152.000000000000000000
-    Position.Y = 392.000000000000000000
+  object btnStart: TCornerButton
+    Position.X = 184.000000000000000000
+    Position.Y = 24.000000000000000000
     Sides = [Top, Left, Bottom, Right]
-    Size.Width = 137.000000000000000000
-    Size.Height = 73.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 1
-    Text = 'Send'
-    XRadius = 3.000000000000000000
-    YRadius = 3.000000000000000000
-    OnClick = CornerButton1Click
-  end
-  object Memo1: TMemo
-    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-    DataDetectorTypes = []
-    Position.X = 24.000000000000000000
-    Position.Y = 32.000000000000000000
-    Size.Width = 209.000000000000000000
-    Size.Height = 349.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
-    Viewport.Width = 201.000000000000000000
-    Viewport.Height = 341.000000000000000000
+    Text = 'start'
+    XRadius = 3.000000000000000000
+    YRadius = 3.000000000000000000
+    OnClick = btnStartClick
   end
-  object Memo2: TMemo
+  object edtConversation: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 23.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 209.000000000000000000
+    Size.Height = 312.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Viewport.Width = 201.000000000000000000
+    Viewport.Height = 304.000000000000000000
+  end
+  object edtChatText: TMemo
     Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
     DataDetectorTypes = []
     Position.X = 24.000000000000000000
     Position.Y = 408.000000000000000000
-    Size.Width = 105.000000000000000000
+    Size.Width = 209.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
-    Viewport.Width = 97.000000000000000000
+    TabOrder = 4
+    Viewport.Width = 201.000000000000000000
     Viewport.Height = 17.000000000000000000
   end
-  object Memo3: TMemo
+  object edtPeople: TMemo
     Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
     DataDetectorTypes = []
-    Position.X = 264.000000000000000000
-    Position.Y = 56.000000000000000000
-    Size.Width = 57.000000000000000000
-    Size.Height = 329.000000000000000000
+    Position.X = 240.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 313.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 4
-    Viewport.Width = 49.000000000000000000
-    Viewport.Height = 321.000000000000000000
+    TabOrder = 5
+    Viewport.Width = 57.000000000000000000
+    Viewport.Height = 305.000000000000000000
   end
   object Label1: TLabel
     Position.X = 24.000000000000000000
-    Position.Y = 8.000000000000000000
+    Position.Y = 48.000000000000000000
     Size.Width = 113.000000000000000000
     Size.Height = 23.000000000000000000
     Size.PlatformDefault = False
@@ -74,14 +74,52 @@ object Form1: TForm1
     Text = 'Your text here..'
   end
   object Label3: TLabel
-    Position.X = 256.000000000000000000
-    Position.Y = 24.000000000000000000
-    Size.Width = 65.000000000000000000
+    Position.X = 240.000000000000000000
+    Position.Y = 48.000000000000000000
+    Size.Width = 49.000000000000000000
     Size.Height = 23.000000000000000000
     Size.PlatformDefault = False
     Text = 'people'
   end
-  object SQLCunnection1: TSQLConnection
+  object btnStop: TCornerButton
+    Enabled = False
+    Position.X = 248.000000000000000000
+    Position.Y = 24.000000000000000000
+    Sides = [Top, Left, Bottom, Right]
+    Size.Width = 57.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'stop'
+    XRadius = 3.000000000000000000
+    YRadius = 3.000000000000000000
+    OnClick = btnStopClick
+  end
+  object edtAddress: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 8
+    Text = '192.168.10.251'
+    Position.X = 24.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 145.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Label4: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 8.000000000000000000
+    Text = 'Connection address'
+  end
+  object btnSend: TButton
+    Position.X = 240.000000000000000000
+    Position.Y = 408.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    Text = 'Send'
+  end
+  object SQLConnection1: TSQLConnection
     DriverName = 'DataSnap'
     LoginPrompt = False
     Params.Strings = (
@@ -96,8 +134,8 @@ object Form1: TForm1
       'Filters={}'
       'CommunicationProtocol=tcp/ip'
       'DatasnapContext=datasnap/')
-    Left = 48
-    Top = 48
+    Left = 128
+    Top = 136
   end
   object ChannelManager: TDSClientCallbackChannelManager
     DSHostname = '192.168.10.53'
@@ -105,7 +143,7 @@ object Form1: TForm1
     CommunicationProtocol = 'tcp/ip'
     ChannelName = 'MemoChannel'
     ManagerId = '360106.772141.433963'
-    Left = 136
-    Top = 48
+    Left = 40
+    Top = 144
   end
 end
