@@ -1,0 +1,16 @@
+object ServerContainer1: TServerContainer1
+  OldCreateOrder = False
+  Height = 271
+  Width = 415
+  object DSServer1: TDSServer
+    Left = 96
+    Top = 11
+  end
+  object DSTCPServerTransport1: TDSTCPServerTransport
+    PoolSize = 0
+    Server = DSServer1
+    Filters = <>
+    Left = 96
+    Top = 73
+  end
+end
